@@ -1,0 +1,29 @@
+services:
+  computer:
+    build: .
+    ports:
+      - '8080:8080'
+    working_dir: /home/root/code/
+    user: root
+    volumes:
+      - ./:/home/root/code/
+    command: "php -S 0.0.0.0:8080 -t /home/root/code/public"
+    networks:
+      - book_wise
+
+  database:
+    container_name: database
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: book_wise
+      POSTGRES_USER: mathz
+      POSTGRES_PASSWORD: leagueofdraven
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    networks:
+      - book_wise
+
+networks:
+  book_wise:
