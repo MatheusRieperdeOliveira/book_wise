@@ -18,6 +18,8 @@ function view($view, $data = [])
 
 function dd(...$vars)
 {
+    echo "<pre>";
     var_dump($vars);
+    echo "</pre>";
     die();
 }

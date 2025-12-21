@@ -15,7 +15,7 @@ services:
     container_name: database
     image: postgres:15
     ports:
-      - '5432:5432'
+      - '5454:5432'
     environment:
       POSTGRES_DB: book_wise
       POSTGRES_USER: mathz

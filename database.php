@@ -17,7 +17,7 @@ class DB
         return array_map(fn ($book) => Book::make($book), $booksInBase);
     }
 
-    public function book(int $id)
+    public function book(int $id): Book
     {
         $sql = "SELECT * FROM books";
 
@@ -29,5 +29,18 @@ class DB
 
         return Book::make($booksInBase[0]);
 
+    }
+
+    public function create_book(): void
+    {
+        $sql = "insert into books (title, author, description) values (:title, :author, :description)";
+
+        $query = $this->connection->prepare($sql);
+
+        $query->bindValue(':title', $_POST['title']);
+        $query->bindValue(':author', $_POST['author']);
+        $query->bindValue(':description', $_POST['description']);
+
+        $query->execute();
     }
 }

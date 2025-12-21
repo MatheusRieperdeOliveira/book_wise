@@ -1,3 +1,5 @@
+<a class="text-lime-500" href="/add-book">Adicionar Livro</a>
+
 <form class="w-full flex space-x-2 mt-6">
     <input
             type="text"
