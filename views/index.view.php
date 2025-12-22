@@ -15,18 +15,27 @@
             placeholder="Pesquisar"
             name="pesquisar"
             class="border-stone-800 border-2 rounded-md bg-stone-900 text-sm focus:outline-none px-2 py-1 w-full">
-    <button type="submit">Pesquisar</button>
+    <button type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+            <path d="M21 21l-6 -6"/>
+        </svg>
+    </button>
 </form>
+
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
     <?php foreach ($books as $book): ?>
-        <div class="p-2 rounded border-stone-800 border-2 bg-stone-900">
+        <div class="p-2 rounded border-stone-800 border-2 bg-neutral-900">
 
-            <div class="flex">
+            <div class="flex gap-2">
                 <div class="w-1/3">
-                    imagem
+                    <img src="../storage/<?= $book->photo_path?>">
                 </div>
 
-                <div class="space-y-1">
+                <div class="space-y-1 px-2">
                     <a href="/book?id=<?= $book->id ?>"
                        class="font-semibold cursor-pointer rounded-lg hover:bg-stone-400">
                         <?= $book->title ?>
@@ -48,7 +57,7 @@
             </div>
 
             <div class="grid grid-cols-2 gap-1">
-                <a href="/delete-book?id=<?= $book->id?>">
+                <a href="/delete-book?id=<?= $book->id ?>">
                     <div class="flex justify-center bg-red-600 rounded py-1 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

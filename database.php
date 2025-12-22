@@ -33,12 +33,17 @@ class DB
 
     public function create_book(): void
     {
-        $sql = "insert into books (title, author, description) values (:title, :author, :description)";
+        if(isset($_FILES['photo'])) {
+            move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . "/storage/" . $_FILES['photo']['name']);
+        };
+
+        $sql = "insert into books (title, author, description, photo_path) values (:title, :author, :description, :photo_path)";
 
         $query = $this->connection->prepare($sql);
 
         $query->bindValue(':title', $_POST['title']);
         $query->bindValue(':author', $_POST['author']);
+        $query->bindValue(':photo_path', $_FILES['photo']['name']);
         $query->bindValue(':description', $_POST['description']);
 
         $query->execute();

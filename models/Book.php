@@ -6,7 +6,7 @@ class Book
     public string $title;
     public string $author;
     public string $description;
-
+    public string $photo_path;
     public static function make($item): self
     {
         $book = new self();
@@ -14,6 +14,7 @@ class Book
         $book->title = $item['title'];
         $book->author = $item['author'];
         $book->description = $item['description'];
+        $book->photo_path = $item['photo_path'];
 
         return $book;
     }

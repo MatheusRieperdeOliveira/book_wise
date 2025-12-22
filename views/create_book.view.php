@@ -1,5 +1,6 @@
 <div class="flex items-center justify-center">
     <form method="POST"
+          enctype="multipart/form-data"
           class="w-full max-w-md bg-stone-900 rounded-2xl shadow-lg p-6 flex flex-col gap-4">
 
         <div class="flex items-center gap-5">
@@ -50,6 +51,16 @@
                     id="description"
                     name="description"
                     value="descrição"
+                    class="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500"
+            >
+        </div>
+
+        <div class="flex flex-col gap-1">
+            <label for="photo" class="text-sm text-white">Foto</label>
+            <input
+                    type="file"
+                    id="photo"
+                    name="photo"
                     class="rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500"
             >
         </div>
