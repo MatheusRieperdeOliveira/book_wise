@@ -21,6 +21,8 @@ function creating_book(): void
 
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') creating_book();
+if ($_SERVER["REQUEST_METHOD"] === "GET") return show();
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') return creating_book();
 
 page_create();
