@@ -28,18 +28,18 @@
 
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
     <?php foreach ($books as $book): ?>
-        <div class="p-2 rounded border-stone-800 border-2 bg-neutral-900">
+        <div class="p-2 rounded border-stone-800 border-2 bg-neutral-900 flex justify-between flex-col">
 
             <div class="flex gap-2">
                 <div class="w-1/3">
-                    <img src="../storage/<?= $book->photo_path?>">
+                    <img src="../storage/<?= $book->photo_path ?>">
                 </div>
 
                 <div class="space-y-1 px-2">
-                    <a href="/book?id=<?= $book->id ?>"
-                       class="font-semibold cursor-pointer rounded-lg hover:bg-stone-400">
+                    <p
+                       class="font-semibold">
                         <?= $book->title ?>
-                    </a>
+                    </p>
 
                     <div class="text-xs italic">
                         <?= $book->author ?>
@@ -56,7 +56,7 @@
                 <?= $book->description ?>
             </div>
 
-            <div class="grid grid-cols-2 gap-1">
+            <div class="grid grid-cols-3 gap-1">
                 <a href="/delete-book?id=<?= $book->id ?>">
                     <div class="flex justify-center bg-red-600 rounded py-1 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -70,7 +70,8 @@
                         </svg>
                     </div>
                 </a>
-                <div class="flex justify-center bg-blue-600 rounded py-1 cursor-pointerx'">
+                <a href="/update-book?id=<?=$book->id?>"
+                        class="flex justify-center bg-blue-600 rounded py-1 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
@@ -79,7 +80,18 @@
                         <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"/>
                         <path d="M16 5l3 3"/>
                     </svg>
-                </div>
+                </a>
+                <a href="/book?id=<?=$book->id?>"
+                        class="flex justify-center bg-lime-600 rounded py-1 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/>
+                        <path d="M12 9h.01"/>
+                        <path d="M11 12h1v4h1"/>
+                    </svg>
+                </a>
             </div>
         </div>
     <?php endforeach; ?>

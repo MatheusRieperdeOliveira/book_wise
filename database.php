@@ -59,4 +59,23 @@ class DB
 
         $query->execute();
     }
+
+    public function update_book()
+    {
+        if(isset($_FILES['photo'])) {
+            move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . "/storage/" . $_FILES['photo']['name']);
+        };
+
+        $sql = "UPDATE books SET title = :title, author = :author, description = :description, photo_path = :photo_path WHERE id = :id";
+
+        $query = $this->connection->prepare($sql);
+
+        $query->bindValue(':id', $_REQUEST['id']);
+        $query->bindValue(':title', $_POST['title']);
+        $query->bindValue(':author', $_POST['author']);
+        $query->bindValue(':photo_path', $_FILES['photo']['name']);
+        $query->bindValue(':description', $_POST['description']);
+
+        $query->execute();
+    }
 }

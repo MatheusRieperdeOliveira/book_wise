@@ -7,6 +7,7 @@ class Book
     public string $author;
     public string $description;
     public string $photo_path;
+
     public static function make($item): self
     {
         $book = new self();
