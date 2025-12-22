@@ -3,9 +3,9 @@ require '../public/data.php';
 
 function show()
 {
-    $bookId = $_REQUEST['id'];
+    $book_id = $_REQUEST['id'];
 
-    $book = (new DB())->book($bookId);
+    $book = (new DB())->book($book_id);
 
     return view("book", ["book" => $book]);
 }
@@ -21,7 +21,20 @@ function creating_book(): void
 
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "GET") return show();
+function delete_book()
+{
+    $book_id = $_REQUEST['id'];
+
+    (new DB())->delete_book($book_id);
+
+    return header("Location: /");
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    if($_SERVER['PATH_INFO']=== '/delete-book') return delete_book();
+    if ($_SERVER['PATH_INFO']=== '/book') return show();
+
+};
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') return creating_book();
 

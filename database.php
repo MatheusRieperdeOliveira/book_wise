@@ -43,4 +43,15 @@ class DB
 
         $query->execute();
     }
+
+    public function delete_book(int $id): void
+    {
+        $sql = "DELETE FROM books WHERE id = :id";
+
+        $query = $this->connection->prepare($sql);
+
+        $query->bindValue(':id', $id);
+
+        $query->execute();
+    }
 }
