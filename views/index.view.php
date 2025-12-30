@@ -28,11 +28,11 @@
 
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
     <?php foreach ($books as $book): ?>
-        <div class="p-2 rounded border-stone-800 border-2 bg-neutral-900 flex justify-between flex-col">
+        <div class="p-2 rounded border-stone-800 border-2 bg-neutral-900 flex justify-between flex-col space-y-3">
 
             <div class="flex gap-2">
-                <div class="w-1/3">
-                    <img src="../storage/<?= $book->photo_path ?>">
+                <div class="w-1/3 rounded">
+                    <img src="../storage/<?= $book->photo_path ?>" class="rounded">
                 </div>
 
                 <div class="space-y-1 px-2">
@@ -50,10 +50,6 @@
                         (3 avalições)
                     </div>
                 </div>
-            </div>
-
-            <div class="text-sm mt-1">
-                <?= $book->description ?>
             </div>
 
             <div class="grid grid-cols-3 gap-1">

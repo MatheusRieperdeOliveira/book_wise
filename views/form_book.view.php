@@ -39,7 +39,7 @@
                     >
                 <div id="container-preview" class="flex flex-col p-3 hidden w-full h-full">
                     <img id="preview"
-                         src="<?= __DIR__ . "/storage/" . $book->photo_path ?? ''?>"
+                         src="<?= __DIR__ . "/storage/" . ($book->photo_path ?? '')?>"
                          class="object-cover rounded w-full h-full"
                          alt="Preview">
 

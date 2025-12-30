@@ -1,5 +1,4 @@
 <?php
-//dd($_POST);
 $controller = 'index';
 
 if (isset($_SERVER['PATH_INFO'])) {
