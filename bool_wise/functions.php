@@ -28,7 +28,16 @@ function initialize_project()
 {
     $db = new DB();
 
-    $db->create_book_table();
+    $db->create_books_table();
+    $db->create_users_table();
 }
+
+function auth() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: /login");
+        exit;
+    }
+}
+
 
 initialize_project();

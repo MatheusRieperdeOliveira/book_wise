@@ -79,13 +79,49 @@ class DB
         $query->execute();
     }
 
-    public function create_book_table(): void
+    public function create_user(): void
+    {
+        $path =  __DIR__ . "/storage/users/" . $_POST['user_name']. "/";
+
+        mkdir($path, 0777, true);
+
+        if(isset($_FILES['user_photo'])) {
+            move_uploaded_file($_FILES['user_photo']['tmp_name'], $path . $_FILES['user_photo']['name']);
+        };
+
+        $sql = "insert into users (name, email, password, photo_path) values (:name, :email, :password, :photo_path)";
+
+        $query = $this->connection->prepare($sql);
+
+        $query->bindValue(':name', $_POST['user_name']);
+        $query->bindValue(':email', $_POST['email']);
+        $query->bindValue(':password', $_POST['password']);
+        $query->bindValue(':photo_path', $_FILES['user_photo']['name']);
+
+        $query->execute();
+    }
+
+    public function create_books_table(): void
     {
         $sql = "CREATE TABLE IF NOT EXISTS books (
         id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
         description VARCHAR(255),
         author VARCHAR(255),
+        photo_path VARCHAR(255)
+    )";
+
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+    }
+
+    public function create_users_table(): void
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS users (
+        id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255),
+        password VARCHAR(255),
         photo_path VARCHAR(255)
     )";
 

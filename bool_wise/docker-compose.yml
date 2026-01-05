@@ -2,12 +2,12 @@ services:
   computer:
     build: .
     ports:
-      - '8080:8080'
+      - '8020:8020'
     working_dir: /home/root/code/
     user: root
     volumes:
       - ./:/home/root/code/
-    command: "php -S 0.0.0.0:8080 -t /home/root/code/public"
+    command: "php -S 0.0.0.0:8020 -t /home/root/code/public"
     networks:
       - book_wise
 
