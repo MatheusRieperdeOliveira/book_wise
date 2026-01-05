@@ -78,4 +78,19 @@ class DB
 
         $query->execute();
     }
+
+    public function create_book_table(): void
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS books (
+        id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description VARCHAR(255),
+        author VARCHAR(255),
+        photo_path VARCHAR(255)
+    )";
+
+        $query = $this->connection->prepare($sql);
+        $query->execute();
+    }
+
 }

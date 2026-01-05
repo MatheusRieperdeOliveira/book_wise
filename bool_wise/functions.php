@@ -23,3 +23,12 @@ function dd(...$vars)
     echo "</pre>";
     die();
 }
+
+function initialize_project()
+{
+    $db = new DB();
+
+    $db->create_book_table();
+}
+
+initialize_project();
