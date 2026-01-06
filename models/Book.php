@@ -8,11 +8,11 @@ class Book extends Model
 {
     protected $table = 'books';
     protected $fillable = [
-        'id',
         'title',
         'author',
         'description',
         'photo_path',
+        'user_id'
     ];
 
     public int $id;
@@ -21,6 +21,10 @@ class Book extends Model
     public string $description;
     public string $photo_path;
 
+    public function create()
+    {
+        parent::create();
+    }
     public function all(): array
     {
         $booksInBase = parent::all();
@@ -46,5 +50,4 @@ class Book extends Model
 
         return $book;
     }
-
 }

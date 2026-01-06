@@ -16,6 +16,14 @@ abstract class Model
         $this->database = new DB();
     }
 
+    public function create()
+    {
+        $fillableWithTwoPoints = implode(", ", array_map(fn ($line) => ":".$line, $this->fillable));
+        $fillable = implode(", ", $this->fillable);
+
+        return $this->database->create($this->table, $fillable, $fillableWithTwoPoints);
+    }
+
     public function all(): array
     {
         return $this->database->all($this->table);

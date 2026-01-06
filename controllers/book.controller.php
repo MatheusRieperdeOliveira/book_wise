@@ -21,7 +21,12 @@ function page_form()
 
 function creating_book()
 {
-    (new DB())->create_book();
+    if(isset($_FILES['photo'])) {
+        $uploadPath = dirname(__DIR__, 1) . '/storage/book_cover/';
+        move_uploaded_file($_FILES['photo']['tmp_name'], $uploadPath . $_FILES['photo']['name']);
+    };
+
+    (new Book())->create();
 
     return header("Location: /");
 }
