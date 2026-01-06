@@ -1,4 +1,7 @@
 <?php
-    require '../public/data.php';
 
-    view("index", ["books" => $books]);
+use models\Book;
+
+    $book = new Book();
+
+    view("index", ["books" => $book->all()]);

@@ -1,17 +1,19 @@
 <?php
-require '../public/data.php';
+
+use models\Book;
 
 function show()
 {
-    $book = (new DB())->book($_REQUEST['id']);
+    $book = new Book();
 
-    return view("book", ["book" => $book]);
+    return view("book", ["book" =>  $book->find("id", $_REQUEST['id'])[0]]);
 }
 
 function page_form()
 {
     if (isset($_REQUEST['id'])) {
-        $book = (new DB())->book($_REQUEST['id']);
+        $book = new Book();
+        $book = $book->find("id", ($_REQUEST['id']));
     }
 
     return view("form_book", ["book" => $book ?? null]);
@@ -19,7 +21,12 @@ function page_form()
 
 function creating_book()
 {
-    (new DB())->create_book();
+    if(isset($_FILES['photo'])) {
+        $uploadPath = dirname(__DIR__, 1) . '/storage/book_cover/';
+        move_uploaded_file($_FILES['photo']['tmp_name'], $uploadPath . $_FILES['photo']['name']);
+    };
+
+    (new Book())->create();
 
     return header("Location: /");
 }
@@ -40,10 +47,11 @@ function update_book()
     return header("Location: /");
 }
 
-function check()
+function check(): void
 {
     if (isset($_REQUEST['id'])) {
-        return update_book();
+        update_book();
+        return;
     }
 
     creating_book();
@@ -51,8 +59,8 @@ function check()
 
 function page_my_books(): void
 {
-    $userId = 1;
-    $books = (new DB())->booksWithUserId($userId);
+    $books = (new Book())->find("user_id", 1);
+
     view('index', ["books" => $books]);
 };
 

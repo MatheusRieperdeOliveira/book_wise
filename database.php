@@ -11,46 +11,18 @@ class DB
         $this->connection = new PDO("pgsql:host=database;dbname=book_wise;port=5432;user=mathz;password=leagueofdraven");
     }
 
-    public function books(): array
+    public function all(string $table): array
     {
-        $query = $this->connection->query("select * from books");
-
-        $booksInBase = $query->fetchAll();
-
-        return array_map(fn ($book) => Book::make($book), $booksInBase);
-    }
-
-    public function booksWithUserId(int $id): array
-    {
-        $sql = "select * from books where user_id = $id";
+        $sql = "SELECT * FROM $table";
 
         $query = $this->connection->query($sql);
 
-        $booksInBase = $query->fetchAll();
-
-        return array_map(fn ($book) => Book::make($book), $booksInBase);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function book(int $id): Book
+    public function create(string $table, $fillable,  $values): void
     {
-        $sql = "SELECT * FROM books";
-
-        $sql .= " where id = " . $id;
-
-        $query = $this->connection->query($sql);
-
-        $booksInBase = $query->fetchAll();
-
-        return Book::make($booksInBase[0]);
-    }
-
-    public function create_book(): void
-    {
-        if(isset($_FILES['photo'])) {
-            move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . "/storage/book_cover/" . $_FILES['photo']['name']);
-        };
-
-        $sql = "insert into books (title, author, description, photo_path, user_id) values (:title, :author, :description, :photo_path, :user_id)";
+        $sql = "insert into $table ($fillable) values ($values)";
 
         $query = $this->connection->prepare($sql);
 
@@ -61,6 +33,17 @@ class DB
         $query->bindValue(':user_id', 1);
 
         $query->execute();
+    }
+
+    public function find(string $table, string $column, int $id): array
+    {
+        $sql = "SELECT * FROM {$table} WHERE {$column} = :id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function delete_book(int $id): void
@@ -143,5 +126,4 @@ class DB
         $query = $this->connection->prepare($sql);
         $query->execute();
     }
-
 }
