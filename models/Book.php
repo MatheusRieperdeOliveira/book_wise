@@ -28,10 +28,17 @@ class Book extends Model
         return array_map(fn ($book) => self::make($book), $booksInBase);
     }
 
+    public function find(string $column, int $id): array
+    {
+        $booksInBase = parent::find($column, $id);
+
+        return array_map(fn ($book) => self::make($book), $booksInBase);
+    }
+
     protected static function make(array $item): Book
     {
-        $book = new static();
-        $book->id = (int) $item['id'];
+        $book = new self();
+        $book->id = $item['id'];
         $book->title = $item['title'];
         $book->author = $item['author'];
         $book->description = $item['description'];

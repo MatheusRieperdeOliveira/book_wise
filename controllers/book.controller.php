@@ -6,7 +6,7 @@ function show()
 {
     $book = new Book();
 
-    return view("book", ["book" => $book->find("id", $_REQUEST['id'])]);
+    return view("book", ["book" =>  $book->find("id", $_REQUEST['id'])[0]]);
 }
 
 function page_form()

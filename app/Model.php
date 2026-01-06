@@ -25,6 +25,4 @@ abstract class Model
     {
         return $this->database->find($this->table, $column, $id);
     }
-
-    abstract protected static function make(array $item);
 }
