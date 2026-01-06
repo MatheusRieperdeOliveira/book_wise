@@ -1,4 +1,7 @@
 <?php
+
+use models\Book;
+
 class DB
 {
     public PDO $connection;
