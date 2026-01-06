@@ -13,8 +13,8 @@
         <div class="font-bold text-xl tracking-wide font-[Open Sans]">Book Wise</div>
 
         <ul class="flex space-x-4 font-bold">
-            <li><a class="text-lime-500" href="/">Explorar</a></li>
-            <li><a href="/my-books">Meus livros</a></li>
+            <li><a class="text-lime-500" href="/">Explore</a></li>
+            <li><a href="/my-books">My books</a></li>
         </ul>
         <ul>
             <li><a href="/login">Fazer login</a></li>

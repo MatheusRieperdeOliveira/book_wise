@@ -20,6 +20,17 @@ class DB
         return array_map(fn ($book) => Book::make($book), $booksInBase);
     }
 
+    public function booksWithUserId(int $id): array
+    {
+        $sql = "select * from books where user_id = $id";
+
+        $query = $this->connection->query($sql);
+
+        $booksInBase = $query->fetchAll();
+
+        return array_map(fn ($book) => Book::make($book), $booksInBase);
+    }
+
     public function book(int $id): Book
     {
         $sql = "SELECT * FROM books";
@@ -31,7 +42,6 @@ class DB
         $booksInBase = $query->fetchAll();
 
         return Book::make($booksInBase[0]);
-
     }
 
     public function create_book(): void

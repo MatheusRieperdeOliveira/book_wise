@@ -49,10 +49,17 @@ function check()
     creating_book();
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    if($_SERVER['PATH_INFO']=== '/delete-book') return delete_book();
-    if ($_SERVER['PATH_INFO']=== '/book') return show();
+function page_my_books(): void
+{
+    $userId = 1;
+    $books = (new DB())->booksWithUserId($userId);
+    view('index', ["books" => $books]);
+};
 
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    if($_SERVER['PATH_INFO'] === '/delete-book') return delete_book();
+    if ($_SERVER['PATH_INFO'] === '/book') return show();
+    if ($_SERVER['PATH_INFO'] === '/my-books') return page_my_books();
 };
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') return check();
