@@ -11,6 +11,26 @@ class DB
         $this->connection = new PDO("pgsql:host=database;dbname=book_wise;port=5432;user=mathz;password=leagueofdraven");
     }
 
+    public function all(string $table): array
+    {
+        $sql = "SELECT * FROM $table";
+
+        $query = $this->connection->query($sql);
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function find(string $table, string $column, int $id): array
+    {
+        $sql = "SELECT * FROM {$table} WHERE {$column} = :id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function books(): array
     {
         $query = $this->connection->query("select * from books");
@@ -143,5 +163,4 @@ class DB
         $query = $this->connection->prepare($sql);
         $query->execute();
     }
-
 }

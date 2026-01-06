@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="icon" href="storage/icon.png" type="image/x-icon">
+    <link rel="icon" href="faviconcoruja.png" type="image/x-icon">
     <title>Book Wise</title>
 </head>
 <body class="bg-stone-950 text-stone-200">
