@@ -1,6 +1,6 @@
 <div class="p-4 rounded border-stone-800 border-2 bg-stone-900">
     <div class="relative h-130 w-full bg-cover bg-top rounded"
-         style="background-image: url('<?= '/storage/' . $book->photo_path ?>')">
+         style="background-image: url('<?= '/storage/book_cover/' . $book->photo_path ?>')">
 
         <div class="absolute inset-0 bg-black/60"></div>
 

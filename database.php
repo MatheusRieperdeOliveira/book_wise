@@ -37,10 +37,10 @@ class DB
     public function create_book(): void
     {
         if(isset($_FILES['photo'])) {
-            move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . "/storage/" . $_FILES['photo']['name']);
+            move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . "/storage/book_cover/" . $_FILES['photo']['name']);
         };
 
-        $sql = "insert into books (title, author, description, photo_path) values (:title, :author, :description, :photo_path)";
+        $sql = "insert into books (title, author, description, photo_path, user_id) values (:title, :author, :description, :photo_path, :user_id)";
 
         $query = $this->connection->prepare($sql);
 
@@ -48,6 +48,7 @@ class DB
         $query->bindValue(':author', $_POST['author']);
         $query->bindValue(':photo_path', $_FILES['photo']['name']);
         $query->bindValue(':description', $_POST['description']);
+        $query->bindValue(':user_id', 1);
 
         $query->execute();
     }
@@ -111,7 +112,8 @@ class DB
         title VARCHAR(255) NOT NULL,
         description VARCHAR(255),
         author VARCHAR(255),
-        photo_path VARCHAR(255)
+        photo_path VARCHAR(255),
+        user_id INTEGER NOT NULL
     )";
 
         $query = $this->connection->prepare($sql);
