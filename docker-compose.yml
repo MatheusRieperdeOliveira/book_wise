@@ -7,7 +7,6 @@ services:
     user: root
     volumes:
       - ./:/home/root/code/
-    command: "php -S 0.0.0.0:8020 -t /home/root/code/public"
     networks:
       - book_wise
 
